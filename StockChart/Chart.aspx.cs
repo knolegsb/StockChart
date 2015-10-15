@@ -39,6 +39,40 @@ namespace StockChart
 
                         XslCompiledTransform xslt = new XslCompiledTransform();
                         xslt.Load(Server.MapPath("stock.xsl"));
+
+                        StringWriter fs = new StringWriter();
+                        xslt.Transform(xd.CreateNavigator(), null, fs);
+                        string result = fs.ToString();
+
+                        divService.InnerHtml = "<br />" + result.Replace("&lt;", "<").Replace("&gt;", ">") + "<br />";
+
+                        String[] symbols = m_symbol.Replace(",", " ").Split(' ');
+                        for (int i = 0; i < symbols.Length; ++i)
+                        {
+                            if (symbols[i].Trim() == "")
+                                continue;
+                            int index = divService.InnerHtml.ToLower().IndexOf(symbols[i].Trim().ToLower() + " is invalid");
+                            if(index == -1)
+                            {
+                                Random random = new Random();
+                                divService.InnerHtml += "<img id='imgChart_" + i.ToString() + "' src='http://ichart.finance.yahoo.com/b?s=" + symbols[i].Trim().ToUpper() + "& " + random.Next() + "' border=0><br />";
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(0," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div1d_" + i.ToString() + "'><b>1d</b></span></a>&nbsp;&nbsp;";
+                                // 5 days
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(1," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div5d_" + i.ToString() + "'>5d</span></a>&nbsp;&nbsp;";
+                                // 3 months
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(2," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div3m_" + i.ToString() + "'>3m</span></a>&nbsp;&nbsp;";
+                                // 6 months
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(3," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div6m_" + i.ToString() + "'>6m</span></a>&nbsp;&nbsp;";
+                                // 1 yeas
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(4," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div1y_" + i.ToString() + "'>1y</span></a>&nbsp;&nbsp;";
+                                // 2 years
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(5," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div2y_" + i.ToString() + "'>2y</span></a>&nbsp;&nbsp;";
+                                // 5 years
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(6," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='div5y_" + i.ToString() + "'>5y</span></a>&nbsp;&nbsp;";
+                                // Max
+                                divService.InnerHtml += "<a style='font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: Blue;' href='javascript:changeChart(7," + i.ToString() + ", \"" + symbols[i].ToLower() + "\");'><span id='divMax_" + i.ToString() + "'>Max</span></a><br><br /><br />&nbsp;&nbsp;";
+                            }
+                        }
                     }
                     catch
                     {
