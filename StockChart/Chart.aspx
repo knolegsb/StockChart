@@ -92,12 +92,12 @@
                     <span style="font-family: Arial, Arial, Helvetica, sans-serif; font-size: 11px; color=#666;">
                         e.g. "YHOO or YHOO GOOG"
                     </span>
-                   <%-- <%if (m_symbol != "")
+                    <%if (m_symbol != "")
                         {%>
                         <div id="divService" runat="server">
 
                         </div>
-                        <%}%>--%>
+                        <%}%>
                 </td>
             </tr>
         </table>
