@@ -82,7 +82,7 @@ namespace StockChart
             }            
         }
 
-        private string GetQuote(string symbol)
+        public string GetQuote(string symbol)
         {
             string result = null;
             try

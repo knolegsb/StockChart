@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Stock Quote and Chart from Yahoo</title>
-    <script>
+    <script  type="text/javascript" language="JavaScript">
         function SendRequest() {
             var txtSymbol = document.getElementById("txtSymbol");
             window.location = "Chart.aspx?s=" + txtSymbol.value;
