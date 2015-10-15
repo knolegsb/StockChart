@@ -30,7 +30,7 @@ namespace StockChart
                 {
                     try
                     {
-                        string arg = GetQuote(m_symbol.Trim());
+                        String arg = GetQuote(m_symbol.Trim());
                         if (arg == null)
                             return;
 
@@ -96,7 +96,7 @@ namespace StockChart
 
                 string tmp = "<StockQuotes>";
                 string content = "";
-                for (int i = 0; i < symbol.Length; i++)
+                for (int i = 0; i < symbols.Length; i++)
                 {
                     if (symbols[i].Trim() == "")
                         continue;
@@ -113,10 +113,11 @@ namespace StockChart
                         tmp += "<Time></Time>";
                         tmp += "<Change></Change>";
                         tmp += "<High></High>";
-                        tmp += "<Low></Los>";
+                        tmp += "<Low></Low>";
                         tmp += "<Volume></Volume>";
                         tmp += "<Bid></Bid>";
                         tmp += "<Ask></Ask>";
+                        //tmp += "<Ask></Ask>";
                         tmp += "</Stock>";
                     }
                     else
